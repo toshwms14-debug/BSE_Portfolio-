@@ -1,15 +1,10 @@
-# Project: SelfDriving Car 
-Currently on phase 1/2 
-
-You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
-```HTML 
-<!--- This is an HTML comment in Markdown -->
-<!--- Anything between these symbols will not render on the published site -->
-```
+# Project: ROBERTSON 
+Hi, I'm Tosh Williams Patterson, and this is my student portfolio 
+This is about my project, the Arduino Uno R3 and/or Robertson 
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
-|  Tosh Williams Patterson | going to pemont middle | Electrical Engineering and Music   | Grade 6th (technicly in 5th and about to be in 6th) 
+|  Tosh W.P | going to Pemot Middle | Electrical Engineering, Music, coding, baking, and drawing   | Grade 6th (technically in 5th and about to be in 6th) 
 
 **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
@@ -17,7 +12,6 @@ You should comment out all portions of your portfolio that you have not complete
   
 # Final Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
