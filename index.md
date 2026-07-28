@@ -39,12 +39,15 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 - the problem I faced was not getting the wires mixed up and getting confused with them
 - The Plan is to make it more focused on the self-driving part of it
+  3
 # Starter Project: The R.G.B Slider
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8o4nzQ7FKmY?si=4_sG5iXU93aqPhAx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+-
 # Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
 
 # Code 
+```cpp
 const int A_1B = 5;
 const int A_1A = 6;
 const int B_1B = 9;
@@ -278,6 +281,7 @@ void loop() {
   // --- State: NORMAL ---
   int left = digitalRead(leftIR);    // 0 = obstacle
   int right = digitalRead(rightIR);  // 0 = obstacle
+```
 
 # Bill of Materials
 Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
