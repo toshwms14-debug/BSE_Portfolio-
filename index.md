@@ -1,4 +1,4 @@
-# Project: ROBERTSON 
+-# Project: ROBERTSON 
 Hi, I'm Tosh Williams Patterson, and this is my student portfolio 
 This is about my project, the Arduino Uno R3 and/or Robertson 
 
@@ -25,21 +25,18 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 # Second Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/y3VAmNlER5Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-For your second milestone, explain what you've worked on since your previous milestone. You can highlight:
-- the camera module is too; improve its navigation and obscole avoiding sensor 
--The problem I faced was not getting the wires mixed up and confusing one wire for another 
-- Finishing the camera module code and installing the gyroscope and adding the code for it too
+- the camera module is to improve its navigation and obstacle avoiding sensor 
+-The problem I faced was not getting the wires mixed up and confusing one wire for another
+- I'm Finishing the camera module code, and I think it's about 95% complete 
 
 # First Milestone 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/i5-jHNgmA0U?si=6OiJg2PzBiqLW92b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-For your first milestone, describe what your project is and how you plan to build it. You can include:
-- the problem i faced was not getting the wires mixed up and getting confused 
-- The Plan is to make it more focused on the selfdriving 
+
+- the problem I faced was not getting the wires mixed up and getting confused with them
+- The Plan is to make it more focused on the self-driving part of it
 # Starter Project: The R.G.B Slider
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8o4nzQ7FKmY?si=4_sG5iXU93aqPhAx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 # Schematics 
