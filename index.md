@@ -8,7 +8,6 @@ This is about my project, the Arduino Uno R3 but i like to call it Robertson
 |:--:|:--:|:--:|:--:|
 |  Tosh W.P | going to Pemot Middle | Electrical Engineering, Music, Coding, Baking, And Drawing   | Grade 6th (technically in 5th and about to be in 6th) 
 
-**Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
 ![Headstone Image](logo.svg)
   
