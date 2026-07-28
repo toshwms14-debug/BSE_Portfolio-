@@ -1,10 +1,12 @@
--# Project: ROBERTSON 
+# Project-Robertson Or The Arduino Uno R3
+
+
 Hi, I'm Tosh Williams Patterson, and this is my student portfolio 
-This is about my project, the Arduino Uno R3 and/or Robertson 
+This is about my project, the Arduino Uno R3 but i like to call it Robertson 
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
-|  Tosh W.P | going to Pemot Middle | Electrical Engineering, Music, coding, baking, and drawing   | Grade 6th (technically in 5th and about to be in 6th) 
+|  Tosh W.P | going to Pemot Middle | Electrical Engineering, Music, Coding, Baking, And Drawing   | Grade 6th (technically in 5th and about to be in 6th) 
 
 **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
@@ -42,21 +44,240 @@ For your final milestone, explain the outcome of your project. Key details to in
 # Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
 
-# Code
-Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
+# Code 
+const int A_1B = 5;
+const int A_1A = 6;
+const int B_1B = 9;
+const int B_1A = 10;
 
-```c++
+const int echoPin = 4;
+const int trigPin = 3;
+const int rightIR = 7;
+const int leftIR = 8;
+
+const int LED_FRONT_L = 11;
+const int LED_FRONT_R = 12;
+const int LED_REAR_L = 2;
+const int LED_REAR_R = 13;
+
+// Speed zones
+const int SPD_STOP = 0;
+const int SPD_CRAWL = 100;
+const int SPD_SLOW = 150;
+const int SPD_NORMAL = 180;
+const int SPD_FAST = 220;
+
+// Timings
+const unsigned long BACK_TIME = 900;
+const unsigned long TURN_TIME = 600;
+const unsigned long BLINK_INTERVAL = 150;
+const unsigned long SENSOR_INTERVAL = 60;
+const int RAMP_STEP = 8;
+const unsigned long RAMP_DELAY = 12;
+const unsigned long STUCK_LIMIT = 2500;
+
+// State machine
+enum State { NORMAL,
+             BACKING,
+             TURNING_LEFT,
+             TURNING_RIGHT,
+             STUCK };
+State carState = NORMAL;
+unsigned long stateStart = 0;
+unsigned long lastSensor = 0;
+unsigned long lastBlink = 0;
+unsigned long backingStart = 0;
+bool blinkOn = false;
+int turnDir = 0;  // -1=left, 1=right, toggles on stuck
+int currentSpeed = 0;
+float lastDist = 999;
+
+// --- LED helpers ---
+void ledsOff() {
+  digitalWrite(LED_FRONT_L, LOW);
+  digitalWrite(LED_FRONT_R, LOW);
+  digitalWrite(LED_REAR_L, LOW);
+  digitalWrite(LED_REAR_R, LOW);
+}
+void frontLeds() {
+  digitalWrite(LED_FRONT_L, HIGH);
+  digitalWrite(LED_FRONT_R, HIGH);
+  digitalWrite(LED_REAR_L, LOW);
+  digitalWrite(LED_REAR_R, LOW);
+}
+void rearLeds() {
+  digitalWrite(LED_FRONT_L, LOW);
+  digitalWrite(LED_FRONT_R, LOW);
+  digitalWrite(LED_REAR_L, HIGH);
+  digitalWrite(LED_REAR_R, HIGH);
+}
+void blinkLeft() {
+  bool b = blinkOn;
+  digitalWrite(LED_FRONT_L, b);
+  digitalWrite(LED_REAR_L, b);
+  digitalWrite(LED_FRONT_R, LOW);
+  digitalWrite(LED_REAR_R, LOW);
+}
+void blinkRight() {
+  bool b = blinkOn;
+  digitalWrite(LED_FRONT_R, b);
+  digitalWrite(LED_REAR_R, b);
+  digitalWrite(LED_FRONT_L, LOW);
+  digitalWrite(LED_REAR_L, LOW);
+}
+
+// --- Motor helpers ---
+void setMotors(int la, int lb, int ra, int rb) {
+  analogWrite(A_1A, la);
+  analogWrite(A_1B, lb);
+  analogWrite(B_1B, ra);
+  analogWrite(B_1A, rb);
+}
+void stopMove() {
+  setMotors(0, 0, 0, 0);
+}
+void driveForward(int spd) {
+  setMotors(spd, 0, spd, 0);
+}
+void driveBackward(int spd) {
+  setMotors(0, spd, 0, spd);
+}
+void pivotLeft(int spd) {
+  setMotors(0, spd, spd, 0);
+}  // reverse left, forward right
+void pivotRight(int spd) {
+  setMotors(spd, 0, 0, spd);
+}  // forward left, reverse right
+void backLeft(int spd) {
+  setMotors(0, spd, 0, 0);
+}
+void backRight(int spd) {
+  setMotors(0, 0, 0, spd);
+}
+
+// --- Speed ramp ---
+void rampTo(int target, bool forward) {
+  if (currentSpeed < target) {
+    currentSpeed += RAMP_STEP;
+    if (currentSpeed > target) currentSpeed = target;
+  } else if (currentSpeed > target) {
+    currentSpeed -= RAMP_STEP;
+    if (currentSpeed < target) currentSpeed = target;
+  }
+  if (forward) driveForward(currentSpeed);
+  else driveBackward(currentSpeed);
+}
+
+// --- Ultrasonic ---
+float readDistance() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  long dur = pulseIn(echoPin, HIGH, 25000);  // 25ms timeout ~4m
+  if (dur == 0) return 400.0;
+  return dur / 58.0;
+}
+
+// --- State transitions ---
+void enterBacking() {
+  carState = BACKING;
+  stateStart = millis();
+  backingStart = stateStart;
+  driveBackward(SPD_SLOW);
+  rearLeds();
+  Serial.println(">> BACKING");
+}
+
+void enterTurn() {
+  unsigned long now = millis();
+  if (now - backingStart > STUCK_LIMIT) {
+    carState = STUCK;
+    turnDir = -turnDir;  // flip turn direction if stuck
+    Serial.println(">> STUCK: flipping turn");
+  } else {
+    carState = (turnDir >= 0) ? TURNING_LEFT : TURNING_RIGHT;
+  }
+  stateStart = now;
+  currentSpeed = 0;
+  Serial.print(">> TURNING ");
+  Serial.println((turnDir >= 0) ? "LEFT" : "RIGHT");
+}
+
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial.println("Hello World!");
+  pinMode(A_1B, OUTPUT);
+  pinMode(A_1A, OUTPUT);
+  pinMode(B_1B, OUTPUT);
+  pinMode(B_1A, OUTPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(leftIR, INPUT);
+  pinMode(rightIR, INPUT);
+  pinMode(LED_FRONT_L, OUTPUT);
+  pinMode(LED_FRONT_R, OUTPUT);
+  pinMode(LED_REAR_L, OUTPUT);
+  pinMode(LED_REAR_R, OUTPUT);
+  ledsOff();
+  turnDir = 1;  // default first turn left
+  Serial.println("Car ready.");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  unsigned long now = millis();
 
-}
-```
+  // Blink ticker
+  if (now - lastBlink >= BLINK_INTERVAL) {
+    blinkOn = !blinkOn;
+    lastBlink = now;
+  }
+
+  // --- State: BACKING ---
+  if (carState == BACKING) {
+    rearLeds();
+    if (now - stateStart >= BACK_TIME) enterTurn();
+    return;
+  }
+
+  // --- State: TURNING_LEFT ---
+  if (carState == TURNING_LEFT) {
+    blinkLeft();
+    pivotLeft(SPD_SLOW);
+    if (now - stateStart >= TURN_TIME) {
+      carState = NORMAL;
+      currentSpeed = 0;
+      ledsOff();
+    }
+    return;
+  }
+
+  // --- State: TURNING_RIGHT ---
+  if (carState == TURNING_RIGHT) {
+    blinkRight();
+    pivotRight(SPD_SLOW);
+    if (now - stateStart >= TURN_TIME) {
+      carState = NORMAL;
+      currentSpeed = 0;
+      ledsOff();
+    }
+    return;
+  }
+
+  // --- State: STUCK ---
+  if (carState == STUCK) {
+    blinkOn ? rearLeds() : ledsOff();  // hazard flash
+    if (now - stateStart >= TURN_TIME) {
+      carState = NORMAL;
+      currentSpeed = 0;
+      ledsOff();
+    }
+    return;
+  }
+
+  // --- State: NORMAL ---
+  int left = digitalRead(leftIR);    // 0 = obstacle
+  int right = digitalRead(rightIR);  // 0 = obstacle
 
 # Bill of Materials
 Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
