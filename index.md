@@ -14,7 +14,7 @@ This is about my project, the Arduino Uno R3 but I like to call it Robertson, fo
 # The Demo Night Milestone
 <iframe width="560" height="315" src="https://www.youtube.com/embed/wIUgYopDJWs?si=ArItXB2jv585P0Ip" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-I Hope That the Future Students Here at Bluestamps Make Great Things and Will Always Work Hard and Never Giving Up and Persevere Too, I thank Everyone Who Helped Me to This Point and Will Never Forget This Experience Here, So I Am Proud Of My Robot Robertson.    
+I Hope That the Future Students Here at Bluestamps Make Great Things and Will Always Work Hard and Never Giving Up and Persevere Too, I thank Everyone Who Helped Me to This Point and Will Never Forget This Experience Here, So I Am Proud Of My porject, Robertson.    
 
 
 # Final Milestone
@@ -23,8 +23,7 @@ I Hope That the Future Students Here at Bluestamps Make Great Things and Will Al
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 For your final milestone, explain the outcome of your project. Key details to include are:
-- What you've accomplished since your previous milestone
-- What your biggest challenges and triumphs were at BSE
+- What you've accomplished since your previous milestone the code is now able to enter it now but i removed the camera module and had no time to re-add it 
 - A summary of key topics you learned about
 - What you hope to learn in the future after everything you've learned at BSE
 
@@ -32,9 +31,10 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 # Second Milestone
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/y3VAmNlER5Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QfTfmKrVslU?si=ZRfOIouY_PULFxvX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-- the camera module is to improve its navigation and obstacle avoiding sensor 
+-  the Arduino is not letting the code in for some reason 
+-  the camera module is to improve its navigation and obstacle avoiding sensor 
 -The problem I faced was not getting the wires mixed up and confusing one wire for another
 - I'm Finishing the camera module code, and I think it's about 95% complete 
 
