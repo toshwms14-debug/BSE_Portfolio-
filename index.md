@@ -2,15 +2,21 @@
 
 
 Hi, I'm Tosh Williams Patterson, and this is my student portfolio 
-This is about my project, the Arduino Uno R3 but i like to call it Robertson 
+This is about my project, the Arduino Uno R3 but I like to call it Robertson, for No Exact Reason 
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
-|  Tosh W.P | going to Pemot Middle | Electrical Engineering, Music, Coding, Baking, And Drawing   | Grade 6th (technically in 5th and about to be in 6th) 
+| Tosh W.P | going to Pemmott Middle | Electrical Engineering, Music, Coding, Baking, And Drawing, Eta | Grade 6th (technically in 5th and about to be in 6th) 
 
 
 ![Headstone Image](logo.svg)
-  
+
+# The Demo Night Milestone
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wIUgYopDJWs?si=ArItXB2jv585P0Ip" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+I Hope That the Future Students Here at Bluestamps Make Great Things and Will Always Work Hard and Never Giving Up and Persevere Too, I thank Everyone Who Helped Me to This Point and Will Never Forget This Experience Here, So I Am Proud Of My Robot Robertson.    
+
+
 # Final Milestone
 
 
